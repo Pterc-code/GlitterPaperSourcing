@@ -1,0 +1,23 @@
+.login-container {
+    display: flex; 
+    flex-direction: row;
+    height: 100vh;
+}
+
+.login-left {
+    flex: 1; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    background-color: #213C45;
+    color: white;
+}
+
+.login-right {
+    flex: 1; 
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

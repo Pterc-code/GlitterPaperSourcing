@@ -1,0 +1,18 @@
+.text-input-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0.2rem;
+}
+
+.text-input {
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: none;
+    border-bottom: 0.01rem solid #ccc;
+    background-color: #F2F4F8;
+}
+
+.text-input-label {
+    color: #21272A;
+    margin-bottom: 0.5rem;
+}

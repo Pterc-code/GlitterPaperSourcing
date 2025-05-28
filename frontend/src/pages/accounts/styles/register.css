@@ -1,0 +1,23 @@
+.register-container {
+    display: flex; 
+    flex-direction: row;
+    height: 100vh;
+}
+
+.register-left {
+    flex: 1; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    background-color: #213C45;
+    color: white;
+}
+
+.register-right {
+    flex: 1; 
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
