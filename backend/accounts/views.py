@@ -3,36 +3,29 @@ from rest_framework import generics
 from rest_framework.permissions import AllowAny
 from .models import User
 from .serializers import SupplierRegisterSerializer, SupplierListSerializer, SupplierTokenObtainPairSerializer
-from rest_framework.permissions import IsAdminUser
-from rest_framework.response import Response
-from rest_framework import status
 from rest_framework_simplejwt.views import TokenObtainPairView
+from backend.permissions import IsStaffOrAdminRole
 
 
+# Endpoint for supplier account creation
 class SupplierRegisterView(generics.CreateAPIView):
     queryset = User.objects.all()
     serializer_class = SupplierRegisterSerializer
     permission_classes = [AllowAny]
 
+# Endpoint for listing all supplier accounts & info
 class SupplierListView(generics.ListAPIView):
     queryset = User.objects.filter(role='supplier')
     serializer_class = SupplierListSerializer
-    permission_classes = [IsAdminUser]
+    permission_classes = [IsStaffOrAdminRole]
 
+# Endpoint for deleting supplier accounts 
 class SupplierDeleteView(generics.DestroyAPIView):
     queryset = User.objects.filter(role='supplier')
     serializer_class = SupplierListSerializer 
-    permission_classes = [IsAdminUser]
-    lookup_field = 'email'  # delete by email
-    
-    def destroy(self, request, *args, **kwargs):
-        instance = self.get_object()
-        email = instance.email
-        self.perform_destroy(instance)
-        return Response(
-            {"message": f"Supplier with email '{email}' was deleted."},
-            status=status.HTTP_200_OK
-        )
+    permission_classes = [IsStaffOrAdminRole]
+    lookup_field = 'email'  
 
+# Endpoint for logging in 
 class LoginView(TokenObtainPairView):
     serializer_class = SupplierTokenObtainPairSerializer

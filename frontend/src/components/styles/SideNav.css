@@ -1,0 +1,68 @@
+/* 
+科瑞特采购系统 font-size: 0.7vw, color: #213C45
+
+
+*/
+
+.side-nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    height: 100vh;
+}
+
+.side-nav-banner {
+    display: flex;
+    align-items: center;
+    font-size: 1vw;
+    color: #213C45;
+}
+
+.side-nav-banner > img {
+    width: 1.5vw;
+    height: auto;
+    margin: 0.2vw;
+}
+
+.side-nav-divider {
+    margin-top: 2vh;
+    height: 0.01rem;
+    background-color: #F2F4F8;
+    width: 90%;
+}
+
+.side-nav-account {
+    width: 2.5vw;
+    height: 2.5vw;
+    border-radius: 50%;
+    border: none;
+    font-size: 1.2vw;
+    color: #C1C7CD;
+    cursor: pointer;
+}
+
+.side-nav-account-wrapper {
+    display: flex;
+    margin-bottom: 1vw;
+    font-size: 16px;
+}
+
+.side-nav-control-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start; 
+    align-items: center;
+    padding-left: 2vw;
+}
+
+.side-nav-control {
+    background-color: white;
+    border: none;
+    font-size: 0.9vw;
+}
+
+.control-panel-icon {
+    margin-right: 0.2vw;
+    width: 1.1vw;
+    height: auto;
+}

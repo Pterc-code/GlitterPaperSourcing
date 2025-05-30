@@ -51,7 +51,14 @@ class SupplierListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['id', 'username', 'email', 'supplier_name', 'supplier_representative', 'phone_number']
+        fields = [
+            'id', 
+            'username', 
+            'email', 
+            'supplier_name', 
+            'supplier_representative', 
+            'phone_number'
+            ]
 
     def get_supplier_name(self, obj):
         return obj.supplier_profile.supplier_name 

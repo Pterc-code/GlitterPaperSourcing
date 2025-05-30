@@ -1,7 +1,6 @@
 from django.urls import path
 from .views import SupplierRegisterView, SupplierDeleteView, SupplierListView, LoginView
 from rest_framework_simplejwt.views import (
-    TokenObtainPairView,
     TokenRefreshView,
 )
 
