@@ -1,10 +1,14 @@
 import './styles/DashboardNav.css';
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { jwtDecode } from 'jwt-decode';
+import ProductDashboard from './ProductDashboard';  
 
 const DashboardNav = () => {
     const [activeTab, setActiveTab] = useState('procurement');
+    const [role, setRole] = useState('');
+
+    // Just for testing, delete later
     const ProcurementTable = () => <div>📦 This is the Procurement Table</div>;
-    const ProductList = () => <div>📋 This is the Product List</div>;
     const SupplierList = () => <div>🏭 This is the Supplier List</div>;
     const OverviewSummary = () => <div>📊 This is the Overview Summary</div>;
     const renderContent = () => {
@@ -12,7 +16,7 @@ const DashboardNav = () => {
             case 'procurement':
                 return <ProcurementTable />;
             case 'products':
-                return <ProductList />;
+                return <ProductDashboard />;
             case 'suppliers':
                 return <SupplierList />;
             case 'overview':
@@ -22,38 +26,55 @@ const DashboardNav = () => {
         }
     };
 
+    useEffect(() => {
+        const token = localStorage.getItem('access_token');
+        if (token) {
+            const decoded = jwtDecode(token);
+            setRole(decoded.role); 
+        }
+    }, []);
+
+
   return (
     <div className="dashboard-nav">
-        <div className="tabs">
-            <button
-                className={activeTab === 'procurement' ? 'tab-button active' : 'tab-button'}
-                onClick={() => setActiveTab('procurement')}
-            >
-                采购
-            </button>
-            <button
-                className={activeTab === 'products' ? 'tab-button active' : 'tab-button'}
-                onClick={() => setActiveTab('products')}
-            >
-                产品
-            </button>
-            <button
-                className={activeTab === 'suppliers' ? 'tab-button active' : 'tab-button'}
-                onClick={() => setActiveTab('suppliers')}
-            >
-                供应商
-            </button>
-            <button
-                className={activeTab === 'overview' ? 'tab-button active' : 'tab-button'}
-                onClick={() => setActiveTab('overview')}
-            >
-                总览
-            </button>
+            <div className="tabs">
+                <button
+                    className={activeTab === 'procurement' ? 'tab-button active' : 'tab-button'}
+                    onClick={() => setActiveTab('procurement')}
+                >
+                    采购
+                </button>
+
+                {(role === 'staff' || role === 'admin') && (
+                <button
+                    className={activeTab === 'products' ? 'tab-button active' : 'tab-button'}
+                    onClick={() => setActiveTab('products')}
+                >
+                    产品
+                </button>
+                )}
+                
+                {(role === 'staff' || role === 'admin') && (
+                    <button
+                        className={activeTab === 'suppliers' ? 'tab-button active' : 'tab-button'}
+                        onClick={() => setActiveTab('suppliers')}
+                    >
+                        供应商
+                    </button>
+                )}
+                {(role === 'staff' || role === 'admin') && (
+                    <button
+                        className={activeTab === 'overview' ? 'tab-button active' : 'tab-button'}
+                        onClick={() => setActiveTab('overview')}
+                    >
+                        总览
+                    </button>
+                )}
             </div>
 
-        <div className="content">
-            {renderContent()}
-        </div>
+            <div className="content">
+                {renderContent()}
+            </div>
     </div>
   );
 };

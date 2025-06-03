@@ -69,20 +69,32 @@ class SupplierListSerializer(serializers.ModelSerializer):
     def get_phone_number(self, obj):
         return obj.supplier_profile.phone_number
 
-class SupplierTokenObtainPairSerializer(TokenObtainPairSerializer):
+class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
     username_field = 'email'
+
     def validate(self, attrs):
         email = attrs.get('email')
         password = attrs.get('password')
+
         user = authenticate(
-            request=self.context.get('request'), 
-            username=email, 
-            password=password)
+            request=self.context.get('request'),
+            username=email,
+            password=password
+        )
+
         if user is None:
             raise AuthenticationFailed("Invalid email or password.")
+
         refresh = self.get_token(user)
+
+        # Add custom claims to the access token
+        access = refresh.access_token
+        access['role'] = user.role  # ✅ Add role to token payload
+
         data = {
             'refresh': str(refresh),
-            'access': str(refresh.access_token),
+            'access': str(access),
         }
+
         return data
+    

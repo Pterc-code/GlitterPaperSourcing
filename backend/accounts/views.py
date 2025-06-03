@@ -2,7 +2,7 @@ from django.shortcuts import render
 from rest_framework import generics
 from rest_framework.permissions import AllowAny
 from .models import User
-from .serializers import SupplierRegisterSerializer, SupplierListSerializer, SupplierTokenObtainPairSerializer
+from .serializers import SupplierRegisterSerializer, SupplierListSerializer, CustomTokenObtainPairSerializer 
 from rest_framework_simplejwt.views import TokenObtainPairView
 from backend.permissions import IsStaffOrAdminRole
 
@@ -28,4 +28,4 @@ class SupplierDeleteView(generics.DestroyAPIView):
 
 # Endpoint for logging in 
 class LoginView(TokenObtainPairView):
-    serializer_class = SupplierTokenObtainPairSerializer
+    serializer_class = CustomTokenObtainPairSerializer

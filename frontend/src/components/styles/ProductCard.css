@@ -1,0 +1,32 @@
+.product-card {
+    display: flex;
+    flex-direction: column;
+    width: 8vw;
+    height: 8vw;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    margin: 1vw;
+    border: 0.1vw solid black;
+    padding: 0;
+    color: #213C45;
+}
+
+.product-card > h3,
+.product-card > p {
+    margin: 0;
+}
+
+.product-icon {
+    font-size: 3vw;
+}
+
+.product-card > h3 {
+    font-size: 1.2vw;
+}
+
+.product-card > p {
+    font-size: 1vw;
+    color: #697077;
+}
+

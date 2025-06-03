@@ -1,0 +1,79 @@
+.create-product-form-container {
+    margin-top: 1vw;
+    display: flex;
+    flex-direction: column;
+}
+
+.create-product-form-inputs {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1vw;
+    align-items: center;
+}
+
+.create-product-form-back-button {
+    display: flex;
+    align-items: center;
+    gap: 0.4vw;
+    font-size: 0.9vw;
+    padding: 0.4vw 1vw;
+    margin-right: 1vw;
+    border: 0.1vw solid #ccc;
+    background-color: white;
+    color: #777;
+    cursor: pointer;
+}
+
+.create-product-form-back-button:hover {
+    background-color: #777;  
+    color: #fff;
+}
+
+.product-name-input,
+.product-description-input {
+    display: flex;
+    flex-direction: column;
+    border-bottom: 0.1vw solid #C1C7CD;
+}
+
+.product-name-input > label,
+.product-description-input > label {
+    margin-top: 1vw;
+    margin-bottom: 1vw;
+    font-size: 0.9vw;
+    color: #213C45;;
+}
+
+.product-name-input > input,
+.product-description-input > input {
+    border: none;
+    padding-bottom: 0.5vw;
+    background-color: transparent;
+    width: 30vw;
+    outline: none;
+    font-size: 0.9vw;
+    color: #999;
+}
+
+.create-product-form-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4vw;
+    font-size: 0.9vw;
+    background-color: white;
+    border: 0.1vw solid #ccc;
+    color: #777;
+    cursor: pointer;
+    margin-right: 1vw;
+    height: 3vw;
+}
+
+.create-product-form-button:hover {
+    background-color: #777;  
+    color: #fff;
+}
+
+.product-icon-dropdown {
+    margin-right: 5vw;
+}

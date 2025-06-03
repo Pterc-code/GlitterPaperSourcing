@@ -1,0 +1,56 @@
+.icon-dropdown {
+    max-width: 30vw;
+    width: fit-content;
+    user-select: none;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1vw;
+    color: #213C45;
+}
+
+.dropdown-list {
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ccc;
+    max-height: 25vw;
+    max-width: 20vw;
+    padding: 0.3rem;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    overflow-y: auto;
+    overflow-x: hidden;
+    z-index: 1000;
+    left: 0;
+    top: calc(100% + 0.1vw);
+}
+
+.dropdown-item {
+    padding: 0.3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.dropdown-item:hover {
+  background-color: #e0e0e0;
+  border-radius: 4px;
+}
+
+.dropdown-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dropdown-header > * {
+    margin: 0.2vw;
+}
+
+
+
+.dropdown-header > label {
+    font-size: 1.2vw;
+}
