@@ -64,7 +64,6 @@ const CreateProductForm = ({ onBack, onCreated }) => {
                     />
                 </div>
                 
-                {/* change this to show a list of all the fontawesome icons if possible. */}
                 <div className="product-icon-dropdown">
                     <IconDropdown onSelect={handleIconSelect}/>
                 </div>

@@ -9,8 +9,8 @@ import ProductListView from './ProductListView';
 const ProductDashboard = () => {
     const [products, setProducts] = useState([]);
     const [query, setQuery] = useState('');
-    const [viewMode, setViewMode] = useState('dashboard'); // 'list', 'add', 'detail'
-    const [viewPayload, setViewPayload] = useState(null); // e.g. selected product
+    const [viewMode, setViewMode] = useState('dashboard'); 
+    const [viewPayload, setViewPayload] = useState(null); 
 
     useEffect(() => {
         axios.get('api/products/')
@@ -27,8 +27,8 @@ const ProductDashboard = () => {
                     setQuery={setQuery}
                     onCreate={() => setViewMode('create-product')}
                     onSelectProduct={(product) => {
-                    setViewPayload(product);
-                    setViewMode('product-detail');
+                        setViewPayload(product);
+                        setViewMode('product-detail');
                     }}
                 />
             )}

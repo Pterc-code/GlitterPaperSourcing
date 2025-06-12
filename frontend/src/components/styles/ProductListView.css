@@ -1,3 +1,11 @@
+:root {
+    --color-muted: #A0A5AC;
+    --color-muted-hover: #ffffff;
+    --color-border: var(--color-muted);
+    --color-text: var(--color-muted);
+    --color-icon: var(--color-muted);
+}
+
 .product-list {
     display: flex;
     flex-wrap: wrap;
@@ -12,12 +20,13 @@
 
 .product-search-icon {
     font-size: 1vw;
+    color: var(--color-icon);
 }
 
 .product-search-bar {
     width: 75vw;
-    padding-bottom: 0.5vw;
-    border-bottom: 0.1vw solid #C1C7CD;
+    padding-bottom: 1.1vw;
+    border-bottom: 0.1vw solid var(--color-border);
 }
 
 .product-function-bar input {
@@ -27,11 +36,16 @@
     margin-left: 0.5rem;
     background-color: transparent;
     flex: 1;
-    color: #999;
+    color: var(--color-text);
+}
+
+.product-function-bar input::placeholder {
+    color: var(--color-text);
+    opacity: 1;
 }
 
 .product-function-bar svg {
-    color: #999;
+    color: var(--color-icon);
 }
 
 .product-function-bar > div {
@@ -46,18 +60,18 @@
     font-size: 0.9vw;
     padding: 0.4vw 1vw;
     margin-right: 1vw;
-    border: 0.1vw solid #ccc;
+    border: 0.1vw solid var(--color-border);
     background-color: white;
-    color: #777;
+    color: var(--color-text);
     cursor: pointer;
 }
 
 .create-product-button:hover {
-    background-color: #777;  
-    color: #fff;
+    background-color: var(--color-muted);  
+    color: var(--color-muted-hover);
 }
 
 .create-product-button:hover svg {
-  color: #fff;
-  transition: color 0.3s ease;
+    color: var(--color-muted-hover);
+    transition: color 0.3s ease;
 }

@@ -1,8 +1,7 @@
 .product-detail-view {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     width: 83vw;
-    justify-content: space-between;
     margin-top: 1vw;
     align-items: center;
 }
@@ -15,20 +14,34 @@
     height: 1vw;
 }
 
-.product-detail-view > button {
+.create-rfq-form-button-wrapper {
+    width: 100%;
+    box-sizing: border-box;
     display: flex;
-    align-items: center;
-    gap: 0.4vw;
-    font-size: 0.9vw;
-    padding: 0.4vw 1vw;
-    margin-right: 1vw;
-    border: 0.1vw solid #ccc;
-    background-color: white;
-    color: #777;
-    cursor: pointer;
+    flex-direction: column;
+    padding-right: 1vw;
+    margin-top: 1vw;
 }
 
-.product-detail-view > button:hover {
-    background-color: #777;  
-    color: #fff;
+.create-rfq-form-button {
+    display: flex;  
+    align-items: center;
+    justify-content: center;
+    gap: 0.4vw;
+    font-size: 0.9vw;
+    background-color: white;
+    border: 0.1vw solid #ccc;
+    color: #777;
+    cursor: pointer;
+    height: 3vw;
+}
+
+.create-rfq-form-button:hover {
+    background-color: var(--color-muted);  
+    color: var(--color-muted-hover);
+}
+
+.create-rfq-form-button:hover svg {
+    color: var(--color-muted-hover);
+    transition: color 0.3s ease;
 }
