@@ -5,14 +5,24 @@ import axios from '../api/axios';
 import './styles/CreateRfqForm.css';
 
 const CreateRfqForm = ({ product, onBack, onCreated }) => {
+
+    const initialHeaders = Array.from({ length: 6 }, (_, i) => ({
+        name: `字段${i + 1}`,
+        is_fixed: false,
+        order: i + 1
+    }));
+
+    const initialRowData = Object.fromEntries(initialHeaders.map(h => [h.name, '']));
+
+
     const [form, setForm] = useState({
         product: product?.id,
         rfq_number: '',
         closing_date: '',
         remarks: '',
         pdf_file: null,
-        headers: [],
-        row_templates: []
+        headers: initialHeaders,
+        row_templates: [{ data: initialRowData, order: 1 }]
     });
 
     const handleChange = (e) => {
@@ -47,8 +57,9 @@ const CreateRfqForm = ({ product, onBack, onCreated }) => {
             await axios.post('/api/forms/', formData, {
                 headers: { 'Content-Type': 'multipart/form-data' }
             });
+            console.log(formData);
             alert('RFQ 表单创建成功');
-            onCreated?.(); // callback to return to list or update UI
+            onCreated?.();
         } catch (error) {
             console.error('提交失败:', error.response?.data || error);
             alert('提交失败，请检查输入内容');
@@ -153,62 +164,73 @@ const CreateRfqForm = ({ product, onBack, onCreated }) => {
                 />
             </div>
 
-            <div className="excel-table">
-                <table>
-                <thead>
-                    <tr>
-                    {form.headers.map((header, idx) => (
-                        <th key={idx}>
-                        <input
-                            value={header.name}
-                            onChange={(e) => updateHeader(idx, 'name', e.target.value)}
-                        />
-                        <select
-                            value={header.is_fixed.toString()}
-                            onChange={(e) => updateHeader(idx, 'is_fixed', e.target.value)}
-                        >
-                            <option value="true">固定</option>
-                            <option value="false">可变</option>
-                        </select>
-                        <button onClick={() => removeColumn(idx)}>
-                            <FontAwesomeIcon icon={faTrash} />
-                        </button>
-                        </th>
-                    ))}
-                    <th>
-                        <button onClick={addColumn}>
-                        <FontAwesomeIcon icon={faPlus} /> 添加列
-                        </button>
-                    </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {form.row_templates.map((row, rIdx) => (
-                    <tr key={rIdx}>
-                        {form.headers.map((header, hIdx) => (
-                        <td key={hIdx}>
-                            <input
-                            value={row.data[header.name] || ''}
-                            onChange={(e) => updateCell(rIdx, header.name, e.target.value)}
-                            />
-                        </td>
-                        ))}
-                        <td>
-                        <button onClick={() => removeRow(rIdx)}>
-                            <FontAwesomeIcon icon={faTrash} /> 删除行
-                        </button>
-                        </td>
-                    </tr>
-                    ))}
-                </tbody>
-                </table>
-                <button onClick={addRow}>
-                    <FontAwesomeIcon icon={faPlus} /> 添加行
-                </button>
 
-                <button onClick={handleSubmit}>
-                    <FontAwesomeIcon icon={faPlus} /> 创建采购单
-                </button>
+            <div className="rfq-form-table-wrapper">
+                <div className="rfq-form-table-scroll">
+                    <table>
+                        <thead className="rfq-form-table-col-wrapper">
+                            <tr>
+                                {form.headers.map((header, idx) => (
+                                    <th className="rfq-form-table-col" key={idx}>
+                                        <div className="rfq-form-col-header-wrapper">
+                                            <div className="rfq-form-col-header-buttons">
+                                                <button onClick={() => removeColumn(idx)}>
+                                                    <FontAwesomeIcon icon={faTrash} />
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div className="rfq-form-col-header-inputs">
+                                            <input
+                                                value={header.name}
+                                                onChange={(e) => updateHeader(idx, 'name', e.target.value)}
+                                            />
+                                            <select
+                                                value={(header.is_fixed ?? false).toString()}
+                                                onChange={(e) => updateHeader(idx, 'is_fixed', e.target.value)}
+                                            >
+                                                <option value="true">固定</option>
+                                                <option value="false">可变</option>
+                                            </select>
+                                        </div>
+                                        
+                                    </th>
+                                ))}
+                                <button className="rfq-form-add-col-button" onClick={addColumn}>
+                                    <FontAwesomeIcon icon={faPlus} /> 添加列
+                                </button>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {form.row_templates.map((row, rIdx) => (
+                                <tr className="rfq-form-table-row" key={rIdx}>
+                                    {form.headers.map((header, hIdx) => (
+                                    <td className="rfq-form-table-row" key={hIdx}>
+                                        <input
+                                        value={row.data[header.name] || ''}
+                                        onChange={(e) => updateCell(rIdx, header.name, e.target.value)}
+                                        />
+                                    </td>
+                                    ))}
+                                    <button className="rfq-form-del-col-button" onClick={() => removeRow(rIdx)}>
+                                        <FontAwesomeIcon icon={faTrash} />
+                                    </button>
+                                </tr>
+                             
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+                <div className="rfq-form-add-row-button-wrapper">
+                    <button className="rfq-form-add-row-button" onClick={addRow}>
+                        <FontAwesomeIcon icon={faPlus} /> 添加行
+                    </button>   
+                </div>
+                <div className="rfq-form-create-button-wrapper">
+                    <button className="rfq-form-create-button" onClick={handleSubmit}>
+                        <FontAwesomeIcon icon={faPlus} /> 创建采购单
+                    </button>
+                </div>
+                
             </div>
         </div>
   ) ;

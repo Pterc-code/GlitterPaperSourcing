@@ -51,22 +51,22 @@ const ProductDashboard = () => {
             )}
 
             {viewMode === 'product-settings' && viewPayload && (
-            <ProductSettings
-                product={viewPayload}
-                onBack={() => setViewMode('product-detail')}
-                onUpdate={() => {
-                axios.get('api/products/').then(res => {
-                    setProducts(res.data);
-                    const updated = res.data.find(p => p.id === viewPayload.id);
-                    setViewPayload(updated);});
-                }}
-                onDelete={() => {
-                axios.get('api/products/').then(res => {
-                    setProducts(res.data);
-                    setViewMode('dashboard');
-                });
-                }}
-            />
+                <ProductSettings
+                    product={viewPayload}
+                    onBack={() => setViewMode('product-detail')}
+                    onUpdate={() => {
+                    axios.get('api/products/').then(res => {
+                        setProducts(res.data);
+                        const updated = res.data.find(p => p.id === viewPayload.id);
+                        setViewPayload(updated);});
+                    }}
+                    onDelete={() => {
+                    axios.get('api/products/').then(res => {
+                        setProducts(res.data);
+                        setViewMode('dashboard');
+                    });
+                    }}
+                />
             )}
         </div>
   );

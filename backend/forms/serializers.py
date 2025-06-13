@@ -32,6 +32,7 @@ class RFQFormViewSetSerializer(serializers.ModelSerializer):
         request = self.context.get('request')
 
         # Extract direct fields
+        rfq_number = validated_data.pop('rfq_number', None)
         product = validated_data.pop('product')
         closing_date = request.data.get('closing_date')
         remarks = request.data.get('remarks', '')
@@ -50,6 +51,7 @@ class RFQFormViewSetSerializer(serializers.ModelSerializer):
 
         # Create RFQ_Form
         rfq = RFQ_Form.objects.create(
+            rfq_number=rfq_number,
             product=product,
             closing_date=closing_date,
             sourcing_status=sourcing_status,
@@ -64,8 +66,6 @@ class RFQFormViewSetSerializer(serializers.ModelSerializer):
             FormRowTemplate.objects.create(rfq_form=rfq, **row)
 
         return rfq
-
-
 
 
 class RFQFormListSerializer(serializers.ModelSerializer):

@@ -4,13 +4,12 @@ import RfqActionBar from './RfqActionBar';
 import RfqTable from './RfqTable';
 import './styles/RfqFormList.css';
 
-const RfqFormList = ({ productId }) => {
+const RfqFormList = ({ productId, onFormClick}) => {
     const [forms, setForms] = useState([]);
     const [filteredForms, setFilteredForms] = useState([]);
     const [selectedForms, setSelectedForms] = useState([]);
     const [searchText, setSearchText] = useState('');
     const [error, setError] = useState('');
-    const [userRole, setUserRole] = useState('');
 
     // Table update on checkbox update
     const handleCheckboxChange = (rfq_number) => {
@@ -88,24 +87,12 @@ const RfqFormList = ({ productId }) => {
     }, [loadForms]);
 
     // Loads user role on render
-    useEffect(() => {
-        const token = localStorage.getItem('access_token');
-        if (token) {
-            try {
-                const payloadBase64 = token.split('.')[1];
-                const decodedPayload = JSON.parse(atob(payloadBase64));
-                setUserRole(decodedPayload.role); 
-            } catch (err) {
-                console.error('Failed to decode token:', err);
-            }
-        }
-    }, []);
+    
 
     return (
         <div className="rfq-forms-wrapper">
             {error && <p className="rfq-error">{error}</p>}
             <RfqActionBar
-                userRole={userRole}
                 searchText={searchText}
                 handleSearchChange={handleSearchChange}
                 updateStatus={updateStatus}
@@ -116,6 +103,7 @@ const RfqFormList = ({ productId }) => {
                 forms={filteredForms}
                 selectedForms={selectedForms}
                 handleCheckboxChange={handleCheckboxChange}
+                onFormClick={onFormClick}
             />
         </div>
     );

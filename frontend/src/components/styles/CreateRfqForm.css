@@ -40,8 +40,6 @@
     color: #999;
 }
 
-
-
 .create-rfq-form-back-button {
     display: flex;
     align-items: center;
@@ -53,4 +51,82 @@
     background-color: white;
     color: #777;
     cursor: pointer;
+}
+
+.rfq-form-pdf-wrapper {
+    font-size: 0.9vw;
+    color: #213C45;
+    display: flex;
+    gap: 1vw;
+    justify-content: left;
+    align-items: center;
+}
+
+.rfq-form-table-wrapper {
+    margin-top: 2vh;
+    width: 100%;
+    overflow-x: auto;
+}
+
+.rfq-form-table-scroll {
+    overflow-x: auto;
+    max-width: 100%;    
+}
+
+.rfq-form-col-header-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.rfq-form-col-header-inputs input, 
+.rfq-form-col-header-inputs select {
+    width: 10vw;
+    height: 3vh;
+    padding: 0;
+    border: 1px solid #ccc;
+}
+
+.rfq-form-col-header-inputs select {
+    margin-bottom: 0.5vw;
+}
+
+.rfq-form-col-header-buttons > * {
+    width: 10vw;
+}
+
+.rfq-form-table-row input {
+    padding: 0;
+    height: 5vh;
+    width: 10vw;
+    border: 1px solid #ccc;
+}
+
+.rfq-form-table-wrapper table {
+    width: 100%;
+}
+
+.rfq-form-table-wrapper th, 
+.rfq-form-table-wrapper td {
+    margin: 0;
+    padding: 0;
+    border: 1px solid #ccc;
+    text-align: center;
+}
+
+.rfq-form-add-col-button,
+.rfq-form-del-col-button {
+    height: 15vh;
+    width: 2vw;
+}
+
+.rfq-form-add-row-button, 
+.rfq-form-create-button-wrapper {
+    width: 100%;
+}
+
+.rfq-form-add-row-wrapper,
+.rfq-form-create-button {
+    min-width: 100%;
+    width: max-content;
 }

@@ -5,7 +5,7 @@
     overflow: hidden;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
     font-size: 0.9vw;
-    table-layout: fixed;
+    table-layout: auto;
 }
 
 .rfq-checkbox {
@@ -25,12 +25,6 @@
     text-align: left;
     border-bottom: 1px solid #E5E7EB;
     vertical-align: middle;
-}
-
-.rfq-table th:first-child,
-.rfq-table td:first-child {
-    width: 3vw;
-    text-align: center;
 }
 
 .rfq-table td .subtext {
@@ -68,16 +62,26 @@
     cursor: pointer;
     font-size: 0.9vw;
     padding: 0;
-}
-
-.rfq-action-button:hover {
     text-decoration: underline;
 }
 
+.rfq-view-button {
+    background: transparent;
+    border: none;
+    color: #2563EB;
+    text-decoration: underline;
+}
+
+.rfq-view-button:hover,
+.rfq-action-button:hover {
+    cursor: pointer;
+}
+
+
 /* Empty row styling */
 .rfq-empty {
-    text-align: center;
+    text-align: right;
     color: #9CA3AF;
     padding: 2vw;
-    font-size: 0.95vw;
+    font-size: 0.95vw;  
 }
