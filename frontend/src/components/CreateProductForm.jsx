@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faCheck } from '@fortawesome/free-solid-svg-icons';
 import IconDropdown from './IconDropdown';
 import './styles/CreateProductForm.css';
+import './styles/UniversalStyles.css';
 
 const CreateProductForm = ({ onBack, onCreated }) => {
     const [form, setForm] = useState({
@@ -36,7 +37,7 @@ const CreateProductForm = ({ onBack, onCreated }) => {
     return (
         <div className="create-product-form-container">
             <div>
-                <button className="create-product-form-back-button" onClick={onBack}>
+                <button className="standard-button" onClick={onBack}>
                     <FontAwesomeIcon icon={faArrowLeft} /> 返回
                 </button>
             </div>

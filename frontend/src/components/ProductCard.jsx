@@ -12,7 +12,7 @@ const ProductCard = ({ product, onClick }) => {
       .join('');
 
   const getIcon = (iconName) => {
-    const camelCaseName = toCamelCase(iconName); 
+    const camelCaseName = toCamelCase(iconName);
     const icon = Icons[camelCaseName];
     if (!icon) {
       console.warn(`Invalid icon: "${iconName}" → "${camelCaseName}". Using fallback.`);

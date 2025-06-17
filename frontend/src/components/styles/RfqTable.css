@@ -8,6 +8,13 @@
     table-layout: auto;
 }
 
+.rfq-table.admin th:first-child,
+.rfq-table.admin td:first-child {
+    width: 0.1vw;
+    text-align: center;
+}
+
+
 .rfq-checkbox {
     width: 1vw;
     height: 1vw;
@@ -80,8 +87,11 @@
 
 /* Empty row styling */
 .rfq-empty {
-    text-align: right;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     color: #9CA3AF;
     padding: 2vw;
     font-size: 0.95vw;  
 }
+

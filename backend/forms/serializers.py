@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from products.models import Product
-from .models import RFQ_Form, FormHeader, FormRowTemplate
+from .models import RFQ_Form, FormHeader, FormRowTemplate, FormRowResponse
 import json
 
 class FormHeaderCreateSerializer(serializers.ModelSerializer):
@@ -16,14 +16,15 @@ class FormRowTemplateCreateSerializer(serializers.ModelSerializer):
 class RFQFormViewSetSerializer(serializers.ModelSerializer):
     product = serializers.PrimaryKeyRelatedField(queryset=Product.objects.all(), write_only=True)
     product_id = serializers.IntegerField(source='product.id', read_only=True)
-
+    product_name = serializers.CharField(source='product.product_name', read_only=True)
+    product_description = serializers.CharField(source='product.product_description', read_only=True)
     headers = FormHeaderCreateSerializer(many=True, required=False)
     row_templates = FormRowTemplateCreateSerializer(many=True, required=False)
 
     class Meta:
         model = RFQ_Form
         fields = [
-            'id', 'rfq_number', 'product', 'product_id',
+            'id', 'rfq_number', 'product_name', 'product', 'product_id', 'product_description',
             'creation_date', 'closing_date', 'sourcing_status',
             'pdf_file', 'remarks', 'headers', 'row_templates'
         ]
@@ -85,3 +86,15 @@ class RFQFormListSerializer(serializers.ModelSerializer):
 
     def get_product_description(self, obj):
         return obj.product.product_description if obj.product else None
+
+class FormRowResponseSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = FormRowResponse
+        fields = ['id', 'row_template', 'supplier_user', 'data', 'submitted_at']
+        read_only_fields = ['id', 'submitted_at', 'supplier_user']
+
+    def create(self, validated_data):
+        request = self.context.get('request')
+        validated_data['supplier_user'] = request.user
+        return super().create(validated_data)
+    

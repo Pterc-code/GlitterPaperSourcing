@@ -37,7 +37,7 @@ const RfqFormList = ({ productId, onFormClick}) => {
     // Loads forms when called
     const loadForms = useCallback(async () => {
         try {
-            const response = await axios.get('/api/forms/');
+            const response = await axios.get('/api/forms/form/');
             const filtered = productId
                 ? response.data.filter(form => form.product_id === productId)
                 : response.data;
@@ -70,7 +70,7 @@ const RfqFormList = ({ productId, onFormClick}) => {
         try {
             await Promise.all(
                 selectedForms.map(rfq_number =>
-                    axios.delete(`/api/forms/${rfq_number}/`)
+                    axios.delete(`/api/forms/form/${rfq_number}/`)
                 )
             );
             setSelectedForms([]);

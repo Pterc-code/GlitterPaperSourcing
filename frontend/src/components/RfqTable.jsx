@@ -1,36 +1,38 @@
 import { useEffect, useState } from 'react';
 import './styles/RfqTable.css';
 
-// CHANGE SO THAT SUPPLIER RENDER ONLY PRODUCTS THEY HAVE
 const RfqTable = ({
     forms,
     selectedForms,
     handleCheckboxChange,
     onFormClick,
-    userRole: propUserRole, // allow prop override if needed
 }) => {
-    const [userRole, setUserRole] = useState(propUserRole || 'supplier');
+    const [userRole, setUserRole] = useState('');
+    const [allowedProducts, setAllowedProducts] = useState([]);  
     const isStaffOrAdmin = userRole === 'staff' || userRole === 'admin';
 
     useEffect(() => {
-        if (propUserRole) {
-            setUserRole(propUserRole);
-            return;
-        }
         const token = localStorage.getItem('access_token');
         if (token) {
             try {
                 const payloadBase64 = token.split('.')[1];
                 const decodedPayload = JSON.parse(atob(payloadBase64));
                 setUserRole(decodedPayload.role || 'supplier');
+                if (decodedPayload.products) {
+                    setAllowedProducts(decodedPayload.products);
+                }
             } catch (err) {
-                setUserRole('supplier');
+                setUserRole('');
             }
         }
-    }, [propUserRole]);
+    }, []);
+
+    const filteredForms = !isStaffOrAdmin
+        ? forms.filter(form => allowedProducts.includes(form.product_id))
+        : forms;
 
     return (
-        <table className="rfq-table">
+        <table className={`rfq-table ${isStaffOrAdmin ? 'admin' : ''}`}>
             <thead>
                 <tr>
                     {isStaffOrAdmin && <th></th>}
@@ -43,12 +45,16 @@ const RfqTable = ({
                 </tr>
             </thead>
             <tbody>
-                {forms.length === 0 ? (
+                {filteredForms.length === 0 ? (
                     <tr>
-                        <td className="rfq-empty">没有匹配的表单</td>
+                        <td colSpan={isStaffOrAdmin ? 7 : 6} >
+                            <div className="rfq-empty">
+                                没有匹配的表单
+                            </div>
+                        </td>
                     </tr>
                 ) : (
-                    forms.map(form => (
+                    filteredForms.map(form => (
                         <tr key={form.id}>
                             {isStaffOrAdmin && (
                                 <td>
@@ -59,7 +65,6 @@ const RfqTable = ({
                                         className="rfq-checkbox"
                                     />
                                 </td>
-                                
                             )}
                             <td>
                                 <button

@@ -2,22 +2,7 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
-}
-
-.product-detail-view-back-setting > button {
-    display: flex;
+    color: #474545;
     align-items: center;
-    gap: 0.4vw;
-    font-size: 0.9vw;
-    padding: 0.4vw 1vw;
-    margin-right: 1vw;
-    border: 0.1vw solid #ccc;
-    background-color: white;
-    color: #777;
-    cursor: pointer;
 }
 
-.product-detail-view-back-setting > button:hover {
-    background-color: #777;  
-    color: #fff;
-}

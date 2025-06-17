@@ -3,6 +3,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 import axios from '../api/axios';
 import './styles/CreateRfqForm.css';
+import './styles/UniversalStyles.css';
+
 
 const CreateRfqForm = ({ product, onBack, onCreated }) => {
 
@@ -54,7 +56,7 @@ const CreateRfqForm = ({ product, onBack, onCreated }) => {
             console.log(key, value);
         }
         try {
-            await axios.post('/api/forms/', formData, {
+            await axios.post('/api/forms/form/', formData, {
                 headers: { 'Content-Type': 'multipart/form-data' }
             });
             console.log(formData);
@@ -114,7 +116,7 @@ const CreateRfqForm = ({ product, onBack, onCreated }) => {
     return (
         <div className="create-rfq-form-wrapper">
             <div>
-                <button className="create-rfq-form-back-button" onClick={onBack}>
+                <button className="standard-button" onClick={onBack}>
                     <FontAwesomeIcon icon={faArrowLeft} /> 返回
                 </button>
             </div>

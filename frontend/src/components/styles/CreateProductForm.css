@@ -11,24 +11,6 @@
     align-items: center;
 }
 
-.create-product-form-back-button {
-    display: flex;
-    align-items: center;
-    gap: 0.4vw;
-    font-size: 0.9vw;
-    padding: 0.4vw 1vw;
-    margin-right: 1vw;
-    border: 0.1vw solid #ccc;
-    background-color: white;
-    color: #777;
-    cursor: pointer;
-}
-
-.create-product-form-back-button:hover {
-    background-color: #777;  
-    color: #fff;
-}
-
 .product-name-input,
 .product-description-input {
     display: flex;

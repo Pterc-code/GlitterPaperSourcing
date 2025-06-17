@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faCheck, faTrash } from '@fortawesome/free-solid-svg-icons';
 import IconDropdown from './IconDropdown';
 import './styles/ProductSettings.css';
+import './styles/UniversalStyles.css';
 
 const ProductSettings = ({ product, onBack, onUpdate, onDelete}) => {
     const [form, setForm] = useState({
@@ -55,10 +56,10 @@ const ProductSettings = ({ product, onBack, onUpdate, onDelete}) => {
     return (
         <div className="product-settings-view">
             <div className="product-settings-back-delete">
-                <button onClick={onBack}>
+                <button onClick={onBack} className="standard-button">
                     <FontAwesomeIcon icon={faArrowLeft} /> 返回
                 </button>
-                <button className="delete-button" onClick={handleDelete}>
+                <button className="standard-button" onClick={handleDelete}>
                     <FontAwesomeIcon icon={faTrash} /> 删除
                 </button>
             </div>

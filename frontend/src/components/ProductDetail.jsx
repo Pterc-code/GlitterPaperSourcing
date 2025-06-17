@@ -5,7 +5,7 @@ import RfqFormList from './RfqFormList';
 import ProductDetailHeaderButton from './ProductDetailHeaderButton';
 import { useState } from 'react';
 import CreateRfqForm from './CreateRfqForm';
-import FormDetails from './FormDetails';
+import FormDetails from './RfqFormDetails';
 
 const ProductDetail = ({ product, onBack, onSettings  }) => {
 
@@ -13,7 +13,6 @@ const ProductDetail = ({ product, onBack, onSettings  }) => {
     const [viewMode, setViewMode] = useState('list'); // 'list', 'create', 'formDetails'
     const [selectedFormId, setSelectedFormId] = useState(null);
 
-    
     return (
         <div className="product-detail-view">
             {/* View mode List */}

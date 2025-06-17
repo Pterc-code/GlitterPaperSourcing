@@ -1,7 +1,7 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from .managers import CustomUserManager
-
+from products.models import Product 
 
 class User(AbstractUser):
     ROLE_CHOICES = (
@@ -28,7 +28,7 @@ class SupplierProfile(models.Model):
     supplier_name = models.CharField(max_length=255)
     supplier_representative = models.CharField(max_length=255)
     phone_number = models.CharField(max_length=20)
-    products = models.ManyToManyField("products.Product", blank=True)
+    products = models.ManyToManyField(Product, blank=True)
     
 class StaffProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='staff_profile')

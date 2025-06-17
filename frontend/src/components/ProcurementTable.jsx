@@ -1,6 +1,6 @@
 import './styles/ProcurementTable.css';
 import RfqFormList from './RfqFormList';
-import FormDetails from './FormDetails';
+import FormDetails from './RfqFormDetails';
 import { useState } from 'react';
 
 const ProcurementTable = () => {
@@ -19,10 +19,13 @@ const ProcurementTable = () => {
                 />
             )}
             {viewMode === 'formDetails' && selectedFormId && (
-                <FormDetails
-                    formId={selectedFormId}
-                    onBack={() => setViewMode('list')}
-                />
+                <div className="form-details-wrapper">
+                    <FormDetails
+                        formId={selectedFormId}
+                        onBack={() => setViewMode('list')}
+                    />
+                </div>
+                
             )}
         </>
     );
