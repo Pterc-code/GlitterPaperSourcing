@@ -6,7 +6,7 @@ import ProductDetailHeaderButton from './ProductDetailHeaderButton';
 import { useState } from 'react';
 import CreateRfqForm from './CreateRfqForm';
 import FormDetails from './RfqFormDetails';
-
+import RfqFormResponse from './RfqFormResponse';
 const ProductDetail = ({ product, onBack, onSettings  }) => {
 
     const getIcon = (iconName) => Icons[iconName] || Icons.faBox;
@@ -32,9 +32,13 @@ const ProductDetail = ({ product, onBack, onSettings  }) => {
 
                     <RfqFormList 
                         productId={product.id}
-                        onFormClick={formId => {
+                        onFormDetailClick={formId => {
                             setSelectedFormId(formId);
                             setViewMode('formDetails');
+                        }}
+                        onFormResponseClick={formId => {
+                            setSelectedFormId(formId);
+                            setViewMode('formResponse');
                         }}
                     />
                 </>
@@ -46,7 +50,7 @@ const ProductDetail = ({ product, onBack, onSettings  }) => {
                     product={product}
                     onBack={() => setViewMode('list')}
                     onCreated={() => {
-                        setViewMode('list'); // reloads RfqFormList
+                        setViewMode('list'); 
                     }}
                 />
             )}
@@ -58,6 +62,15 @@ const ProductDetail = ({ product, onBack, onSettings  }) => {
                     onBack={() => setViewMode('list')}
                 />
             )}
+
+            {/* Viewmode FormResponse */}
+            {viewMode === 'formResponse' && selectedFormId && (
+                <RfqFormResponse
+                    formId={selectedFormId}
+                    onBack={() => setViewMode('list')}
+                />
+            )}
+
         </div>
 
   );

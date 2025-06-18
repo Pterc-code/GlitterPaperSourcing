@@ -36,47 +36,47 @@ const DashboardNav = () => {
     }, []);
 
 
-  return (
-    <div className="dashboard-nav">
-            <div className="tabs">
-                <button
-                    className={activeTab === 'procurement' ? 'tab-button active' : 'tab-button'}
-                    onClick={() => setActiveTab('procurement')}
-                >
-                    采购
-                </button>
-
-                {(role === 'staff' || role === 'admin') && (
-                <button
-                    className={activeTab === 'products' ? 'tab-button active' : 'tab-button'}
-                    onClick={() => setActiveTab('products')}
-                >
-                    产品
-                </button>
-                )}
-                
-                {(role === 'staff' || role === 'admin') && (
+    return (
+        <div className="dashboard-nav">
+                <div className="tabs">
                     <button
-                        className={activeTab === 'suppliers' ? 'tab-button active' : 'tab-button'}
-                        onClick={() => setActiveTab('suppliers')}
+                        className={activeTab === 'procurement' ? 'tab-button active' : 'tab-button'}
+                        onClick={() => setActiveTab('procurement')}
                     >
-                        供应商
+                        采购
                     </button>
-                )}
-                {(role === 'staff' || role === 'admin') && (
-                    <button
-                        className={activeTab === 'overview' ? 'tab-button active' : 'tab-button'}
-                        onClick={() => setActiveTab('overview')}
-                    >
-                        总览
-                    </button>
-                )}
-            </div>
 
-            <div className="content">
-                {renderContent()}
-            </div>
-    </div>
+                    {(role === 'staff' || role === 'admin') && (
+                    <button
+                        className={activeTab === 'products' ? 'tab-button active' : 'tab-button'}
+                        onClick={() => setActiveTab('products')}
+                    >
+                        产品
+                    </button>
+                    )}
+                    
+                    {(role === 'staff' || role === 'admin') && (
+                        <button
+                            className={activeTab === 'suppliers' ? 'tab-button active' : 'tab-button'}
+                            onClick={() => setActiveTab('suppliers')}
+                        >
+                            供应商
+                        </button>
+                    )}
+                    {(role === 'staff' || role === 'admin') && (
+                        <button
+                            className={activeTab === 'overview' ? 'tab-button active' : 'tab-button'}
+                            onClick={() => setActiveTab('overview')}
+                        >
+                            总览
+                        </button>
+                    )}
+                </div>
+
+                <div className="content">
+                    {renderContent()}
+                </div>
+        </div>
   );
 };
 

@@ -5,7 +5,8 @@ const RfqTable = ({
     forms,
     selectedForms,
     handleCheckboxChange,
-    onFormClick,
+    onFormDetailClick,
+    onFormResponseClick
 }) => {
     const [userRole, setUserRole] = useState('');
     const [allowedProducts, setAllowedProducts] = useState([]);  
@@ -69,7 +70,7 @@ const RfqTable = ({
                             <td>
                                 <button
                                     className="rfq-view-button"
-                                    onClick={() => onFormClick(form.rfq_number)}
+                                    onClick={() => onFormDetailClick(form.rfq_number)}
                                 >
                                     <span className="rfq-number">{form.rfq_number}</span>
                                 </button>
@@ -88,7 +89,9 @@ const RfqTable = ({
                             </td>
                             {isStaffOrAdmin && (
                                 <td>
-                                    <button className="rfq-action-button">查看报价</button>
+                                    <button className="rfq-action-button" onClick={() => onFormResponseClick(form.rfq_number)}>
+                                        查看报价
+                                    </button>
                                 </td>
                             )}
                         </tr>

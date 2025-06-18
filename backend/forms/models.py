@@ -41,5 +41,8 @@ class FormRowResponse(models.Model):
     data = models.JSONField()  
     submitted_at = models.DateTimeField(auto_now_add=True)
 
-    class Meta:
-        unique_together = ('row_template', 'supplier_user') 
+class SupplierFormRemark(models.Model):
+    rfq_form = models.ForeignKey(RFQ_Form, on_delete=models.CASCADE, related_name='supplier_remarks')
+    supplier_user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    remark = models.TextField(blank=True)
+    submitted_at = models.DateTimeField(auto_now=True)

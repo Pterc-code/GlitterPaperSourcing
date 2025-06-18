@@ -4,7 +4,7 @@ import RfqActionBar from './RfqActionBar';
 import RfqTable from './RfqTable';
 import './styles/RfqFormList.css';
 
-const RfqFormList = ({ productId, onFormClick}) => {
+const RfqFormList = ({ productId, onFormDetailClick, onFormResponseClick}) => {
     const [forms, setForms] = useState([]);
     const [filteredForms, setFilteredForms] = useState([]);
     const [selectedForms, setSelectedForms] = useState([]);
@@ -54,7 +54,7 @@ const RfqFormList = ({ productId, onFormClick}) => {
         try {
             await Promise.all(
                 selectedForms.map(rfq_number =>
-                    axios.patch(`/api/forms/${rfq_number}/`, { sourcing_status: status })
+                    axios.patch(`/api/forms/form/${rfq_number}/`, { sourcing_status: status })
                 )
             );
             setSelectedForms([]);
@@ -86,9 +86,6 @@ const RfqFormList = ({ productId, onFormClick}) => {
         loadForms();
     }, [loadForms]);
 
-    // Loads user role on render
-    
-
     return (
         <div className="rfq-forms-wrapper">
             {error && <p className="rfq-error">{error}</p>}
@@ -103,7 +100,8 @@ const RfqFormList = ({ productId, onFormClick}) => {
                 forms={filteredForms}
                 selectedForms={selectedForms}
                 handleCheckboxChange={handleCheckboxChange}
-                onFormClick={onFormClick}
+                onFormDetailClick={onFormDetailClick}
+                onFormResponseClick={onFormResponseClick}
             />
         </div>
     );

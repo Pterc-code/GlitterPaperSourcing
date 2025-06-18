@@ -6,5 +6,5 @@ from .views import (
 
 urlpatterns = [
     path('', ProductListCreateView.as_view(), name='product_list_create'),
-    path('<str:product_name>/<str:product_description>/', ProductRetrieveUpdateDeleteView.as_view(),name='product_detail')
+    path('<int:pk>/', ProductRetrieveUpdateDeleteView.as_view(), name='product-detail'),
 ]

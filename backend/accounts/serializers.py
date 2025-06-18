@@ -82,6 +82,8 @@ class SupplierListSerializer(serializers.ModelSerializer):
     def get_products(self, obj):
         return [product.id for product in obj.supplier_profile.products.all()]
     
+    
+    
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
     username_field = 'email'
 

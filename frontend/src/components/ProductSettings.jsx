@@ -23,33 +23,29 @@ const ProductSettings = ({ product, onBack, onUpdate, onDelete}) => {
 
     const handleUpdate = async () => {
         try {
-        await axios.put(
-            `api/products/${product.product_name}/${product.product_description}/`,
-            form
-        );
-        alert('产品更新成功');
-        onUpdate();
-        onBack();
+            await axios.patch(`api/products/${product.id}/`, form);
+            alert('产品更新成功');
+            onUpdate();
+            onBack();
         } catch (err) {
-        alert('更新失败');
-        console.error(err);
+            alert('更新失败');
+            console.error(err);
         }
     };
 
+
     const handleDelete = async () => {
-        const confirmed = window.confirm('确认要删除此产品吗？');
+    const confirmed = window.confirm('确认要删除此产品吗？');
         if (!confirmed) return;
 
         try {
-        await axios.delete(
-            `api/products/${product.product_name}/${product.product_description}/`
-        );
-        alert('产品已删除');
-        onDelete();
-        onBack();
+            await axios.delete(`api/products/${product.id}/`);
+            alert('产品已删除');
+            onDelete();
+            onBack();
         } catch (err) {
-        alert('删除失败');
-        console.error(err);
+            alert('删除失败');
+            console.error(err);
         }
     };
 

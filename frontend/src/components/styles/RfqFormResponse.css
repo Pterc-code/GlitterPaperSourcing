@@ -1,5 +1,4 @@
-
-.form-detail-view-information {
+.form-response-view-information {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -11,7 +10,8 @@
     background-color: #fff; 
 }
 
-.form-details-header-wrapper {
+
+.form-response-header-wrapper {
     margin-top: -1vw;
     display: flex;
     justify-content: space-between;
@@ -21,40 +21,10 @@
     font-weight: 600;
 }
 
-.company-title {
-    display: flex;
-    align-items: center;
-    padding: 0;
-    margin: 0;
-}
-
-.company-title img {
-    width: 1.2vw;
-    margin-right: 0.2vw;
-}
-
-.product-name {
-    font-size: 1.2vw;
-}
-
-.product-description {
-    margin-top: -1.6vw;
-    text-align: center;
-    color: #A0A5AC;
-    font-size: 0.9vw;
-}
-
-.form-details-additional-info-wrapper {
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-    font-size: 1vw;
-}
-
 
 /* Table Styles */
-.form-details-table {
-    width: 100%;
+.form-response-table {
+    width: max-content;
     border-collapse: separate;
     border-spacing: 0;
     margin-top: 1vw;
@@ -62,12 +32,11 @@
     font-size: 0.95vw;
     border: 0.1vw solid #ddd; 
     margin-bottom: 1vw;
-
     overflow-x: auto;
     table-layout: fixed;
 }
 
-.form-details-table th {
+.form-response-table th {
     background-color: #f5f5f5;
     color: #333;
     font-weight: 600;
@@ -76,40 +45,41 @@
     border-bottom: 1px solid #ddd;
 }
 
-.form-details-table td {
+.form-response-table td {
     text-align: center;
 }
 
-.form-details-table tbody tr:nth-child(even) {
-    background-color: #fafafa;
+.form-response-table tbody tr:nth-child(even) .sticky-col,
+.form-response-table tbody tr:nth-child(even) {
+  background-color: #fafafa;
 }
 
-.form-details-table td {
+.form-response-table tbody tr:nth-child(odd) .sticky-col,
+.form-response-table tbody tr:nth-child(odd){
+  background-color: #fff;
+}
+
+.form-response-table td {
     text-align: center;
     padding: 1vw;
 }
 
-.form-details-table th {
+.form-response-table th {
     padding: 1vw;
 }
 
-.form-details-table-wrapper {
+.form-response-table-wrapper {
     overflow-x: auto;
     max-width: 100%;
-}
-
-.form-details-table input[type="text"] {
-    width: 90%;
-    height: 3vh;
-    font-size: 0.95vw;
-    border: 0.1vw solid #ccc;
-    box-sizing: border-box;
-    padding: 0 0.5vw;
-    text-align: center;
 }
 
 .sticky-col {
     position: sticky;
     z-index: 2;
     background-color: #fff;
+}
+
+.form-response-table th,
+.form-response-table td {
+    white-space: nowrap;       
 }

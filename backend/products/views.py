@@ -11,13 +11,6 @@ class ProductListCreateView(generics.ListCreateAPIView):
 
 # Endpoint for product retrieval, update, and delete
 class ProductRetrieveUpdateDeleteView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Product.objects.all()
     serializer_class = ProductSerializer
     permission_classes = [IsStaffOrAdminRole]
-
-    def get_object(self):
-        product_name = self.kwargs.get('product_name')
-        product_description = self.kwargs.get('product_description')
-        return Product.objects.get(
-            product_name=product_name,
-            product_description=product_description
-        )

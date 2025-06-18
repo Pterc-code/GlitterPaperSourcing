@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from products.models import Product
-from .models import RFQ_Form, FormHeader, FormRowTemplate, FormRowResponse
+from .models import RFQ_Form, FormHeader, FormRowTemplate, FormRowResponse, SupplierFormRemark
 import json
 
 class FormHeaderCreateSerializer(serializers.ModelSerializer):
@@ -68,7 +68,6 @@ class RFQFormViewSetSerializer(serializers.ModelSerializer):
 
         return rfq
 
-
 class RFQFormListSerializer(serializers.ModelSerializer):
     product_id = serializers.IntegerField(source='product.id', read_only=True)
     product_name = serializers.SerializerMethodField()
@@ -88,13 +87,81 @@ class RFQFormListSerializer(serializers.ModelSerializer):
         return obj.product.product_description if obj.product else None
 
 class FormRowResponseSerializer(serializers.ModelSerializer):
+    supplier_name = serializers.SerializerMethodField()
+    supplier_representative = serializers.SerializerMethodField()
+    phone_number = serializers.SerializerMethodField()
+    remark = serializers.SerializerMethodField()
+
     class Meta:
         model = FormRowResponse
-        fields = ['id', 'row_template', 'supplier_user', 'data', 'submitted_at']
+        fields = [
+            'id',
+            'row_template',
+            'supplier_user',
+            'data',
+            'submitted_at',
+            'supplier_name',
+            'supplier_representative',
+            'phone_number',
+            'remark'
+        ]
         read_only_fields = ['id', 'submitted_at', 'supplier_user']
 
+    def get_supplier_name(self, obj):
+        if hasattr(obj.supplier_user, 'supplier_profile'):
+            return obj.supplier_user.supplier_profile.supplier_name
+        return '内部账号'
+
+    def get_supplier_representative(self, obj):
+        if hasattr(obj.supplier_user, 'supplier_profile'):
+            return obj.supplier_user.supplier_profile.supplier_representative
+        return '内部账号'
+
+    def get_phone_number(self, obj):
+        if hasattr(obj.supplier_user, 'supplier_profile'):
+            return obj.supplier_user.supplier_profile.phone_number
+        return '内部账号'
+
+    def get_remark(self, obj):
+        try:
+            remark_obj = SupplierFormRemark.objects.get(
+                rfq_form=obj.row_template.rfq_form,
+                supplier_user=obj.supplier_user
+            )
+            return remark_obj.remark
+        except SupplierFormRemark.DoesNotExist:
+            return ''
+        
     def create(self, validated_data):
         request = self.context.get('request')
         validated_data['supplier_user'] = request.user
         return super().create(validated_data)
+
     
+from rest_framework import serializers
+from .models import SupplierFormRemark
+
+class SupplierFormRemarkSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SupplierFormRemark
+        fields = '__all__'
+        read_only_fields = ['supplier_user', 'submitted_at']
+
+    def create(self, validated_data):
+        request = self.context.get('request')
+        validated_data['supplier_user'] = request.user
+
+        # Check if a remark already exists for this supplier + form
+        existing = SupplierFormRemark.objects.filter(
+            rfq_form=validated_data['rfq_form'],
+            supplier_user=request.user
+        ).first()
+
+        if existing:
+            # Update existing remark
+            existing.remark = validated_data.get('remark', existing.remark)
+            existing.save()
+            return existing
+
+        # Create new remark if none exists
+        return super().create(validated_data)

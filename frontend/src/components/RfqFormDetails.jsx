@@ -1,16 +1,16 @@
 import { useEffect, useState } from 'react';
 import axios from '../api/axios';
-import './styles/FormDetails.css';
+import './styles/RfqFormDetails.css';
 import './styles/UniversalStyles.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
-const FormDetails = ({ formId, onBack }) => {
+const RfqFormDetails = ({ formId, onBack }) => {
     const [form, setForm] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
     const [responseInputs, setResponseInputs] = useState({});
-
+    const [supplierRemark, setSupplierRemark] = useState('');
 
     const getStickyLeft = (headers, idx, columnWidth = 120) =>
         headers.slice(0, idx).reduce((sum, h) => sum + (h.is_fixed ? columnWidth : 0), 0);
@@ -35,6 +35,12 @@ const FormDetails = ({ formId, onBack }) => {
                 };
                 await axios.post('/api/forms/form-response/', responseData);
             }
+
+            await axios.post('/api/forms/form-remarks/', {
+                rfq_form: form.id,
+                remark: supplierRemark
+            });
+
             alert("全部提交成功！");
         } catch (error) {
             alert("提交失败！");
@@ -123,7 +129,7 @@ const FormDetails = ({ formId, onBack }) => {
                                         ))}
                                         <td>
                                             <input
-                                                type="text"
+                                                type="number"
                                                 value={responseInputs[row.id]?.报价 || ''}
                                                 onChange={(e) =>
                                                     handleInputChange(row.id, '报价', e.target.value)
@@ -140,10 +146,13 @@ const FormDetails = ({ formId, onBack }) => {
                             )}
                         </tbody>
                     </table>
-
                 </div>
-                
-
+                {/* Add input field to handle remark submission */}
+                <textarea
+                    placeholder="填写备注"
+                    value={supplierRemark}
+                    onChange={(e) => setSupplierRemark(e.target.value)}
+                />
                 <button onClick={handleSubmitAll} className="standard-button">
                     提交
                 </button>
@@ -152,4 +161,4 @@ const FormDetails = ({ formId, onBack }) => {
     );
 };
 
-export default FormDetails;
+export default RfqFormDetails;
