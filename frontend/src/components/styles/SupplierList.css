@@ -1,0 +1,67 @@
+.supplier-list-wrapper {
+    margin-top: 1vw;
+}
+
+
+
+.supplier-list-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    font-size: 0.9vw;
+    table-layout: auto;
+}
+
+.supplier-list-table th,
+.supplier-list-table td {
+    padding: 1vw;
+    text-align: left;
+    border-bottom: 1px solid #E5E7EB;
+    vertical-align: middle;
+}
+
+.supplier-list-table thead {
+    background-color: #F5F7FA;
+    color: #3E3E3E;
+    font-weight: bold;
+}
+
+.supplier-list-empty {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #9CA3AF;
+    padding: 2vw;
+    font-size: 0.95vw;  
+}
+
+
+/* Search Bar */
+
+.supplier-list-search-bar-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 1.1vw;
+    border-bottom: 0.1vw solid var(--color-border);
+    width: 81vw;
+    margin-bottom: 1vw;
+}
+
+.supplier-search-bar {
+    border: none;
+    outline: none;
+    font-size: 1vw;
+    margin-left: 0.5vw;
+    background-color: transparent;
+    flex: 1;
+    color: var(--color-text);
+}
+
+.supplier-list-search-icon {
+    font-size: 1vw;
+    color: var(--color-icon);
+}
+

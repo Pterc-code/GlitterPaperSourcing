@@ -52,8 +52,11 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
+    
+    'django.contrib.sessions.middleware.SessionMiddleware',     # Session must come first
+    'django.middleware.locale.LocaleMiddleware',                # Locale must follow sessions
+    'django.middleware.common.CommonMiddleware',                # Common after locale
+
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -138,7 +141,7 @@ SIMPLE_JWT = {
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'zh-hans' 
 
 TIME_ZONE = 'UTC'
 
@@ -159,3 +162,20 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'fzglitterpaper@gmail.com'
+EMAIL_HOST_PASSWORD = 'rlur fddl mpzw sflb'
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'Glitter Paper <fzglitterpaper@gmail.com>'
+
+
+
+TIME_ZONE = 'Asia/Shanghai'
+
+USE_I18N = True
+USE_L10N = True
+USE_TZ = True

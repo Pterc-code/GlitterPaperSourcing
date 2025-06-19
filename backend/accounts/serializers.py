@@ -67,7 +67,7 @@ class SupplierListSerializer(serializers.ModelSerializer):
             'supplier_name', 
             'supplier_representative', 
             'phone_number',
-            'products'
+            'products',
         ]
 
     def get_supplier_name(self, obj):
@@ -80,7 +80,13 @@ class SupplierListSerializer(serializers.ModelSerializer):
         return obj.supplier_profile.phone_number
 
     def get_products(self, obj):
-        return [product.id for product in obj.supplier_profile.products.all()]
+        return [
+            {
+                "id": product.id,
+                "product_name": product.product_name
+            }
+            for product in obj.supplier_profile.products.all()
+        ]
     
     
     
@@ -119,3 +125,41 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
 
         return data
     
+
+class SupplierUpdateSerializer(serializers.ModelSerializer):
+    supplier_name = serializers.CharField(source='supplier_profile.supplier_name', required=False)
+    supplier_representative = serializers.CharField(source='supplier_profile.supplier_representative', required=False)
+    phone_number = serializers.CharField(source='supplier_profile.phone_number', required=False)
+    products = serializers.PrimaryKeyRelatedField(
+        queryset=Product.objects.all(),
+        many=True,
+        source='supplier_profile.products',
+        required=False
+    )
+
+    class Meta:
+        model = User
+        fields = ['email', 'supplier_name', 'supplier_representative', 'phone_number', 'products']
+
+    def update(self, instance, validated_data):
+        request = self.context.get('request')
+        profile_data = validated_data.pop('supplier_profile', {})
+
+        # Anyone can update email
+        instance.email = validated_data.get('email', instance.email)
+        instance.save()
+
+        profile = instance.supplier_profile
+
+        # Supplier can update their own name, rep, phone
+        if request.user == instance:
+            profile.supplier_name = profile_data.get('supplier_name', profile.supplier_name)
+            profile.supplier_representative = profile_data.get('supplier_representative', profile.supplier_representative)
+            profile.phone_number = profile_data.get('phone_number', profile.phone_number)
+
+        # Only staff/admin can update products
+        if request.user.role in ['staff', 'admin'] and 'products' in profile_data:
+            profile.products.set(profile_data['products'])
+
+        profile.save()
+        return instance

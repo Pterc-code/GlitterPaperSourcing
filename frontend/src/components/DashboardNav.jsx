@@ -3,14 +3,13 @@ import { useState, useEffect } from 'react';
 import { jwtDecode } from 'jwt-decode';
 import ProductDashboard from './ProductDashboard';  
 import ProcurementTable from './ProcurementTable';
+import SupplierList from './SupplierList';
 
 const DashboardNav = () => {
     const [activeTab, setActiveTab] = useState('procurement');
     const [role, setRole] = useState('');
 
     // Just for testing, delete later
-    // const ProcurementTable = () => <div>📦 This is the Procurement Table</div>;
-    const SupplierList = () => <div>🏭 This is the Supplier List</div>;
     const OverviewSummary = () => <div>📊 This is the Overview Summary</div>;
     const renderContent = () => {
         switch (activeTab) {
