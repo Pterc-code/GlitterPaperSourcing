@@ -65,3 +65,53 @@
     color: var(--color-icon);
 }
 
+/* Edit Supplier Products */
+
+.supplier-edit-product-wrapper {
+    display: flex;
+    margin-bottom: 1vw;
+    border: 0.1vw solid #E5E7EB;
+    padding: 1vw;
+    width: 81vw;
+    
+}
+
+.supplier-edit-product-content {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+}
+.supplier-edit-product-content h3 {
+    margin: 0;
+    font-size: 1.5vw;
+}
+
+.supplier-edit-product-checkbox-list {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5vw;
+    font-size: 1vw;
+}
+
+.supplier-edit-product-checkbox-list .subtext {
+    display: block;
+    font-size: 0.8vw;
+    color: #9CA3AF;
+    margin-left: 1.2vw;
+}
+
+.supplier-edit-product-edit-actions {
+    display: flex;
+    margin-top: 1vw;
+}
+
+.supplier-products-list {
+    padding: 0;
+}
+
+.supplier-products-list > * {
+    text-align: center;
+    padding: 0.2vw;
+    border: 0.1vw solid #E5E7EB;
+    list-style-type: none;
+}

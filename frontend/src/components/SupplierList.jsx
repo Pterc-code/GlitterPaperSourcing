@@ -109,6 +109,33 @@ const SupplierList = () => {
     return (
         <div className="supplier-list-wrapper">
             {error && <p className="supplier-list-error">{error}</p>}
+            {selectedSupplier && (
+                <div className="supplier-edit-product-wrapper">
+                    <div className="supplier-edit-product-content">
+                        <h3>编辑 {selectedSupplier.supplier_name} 的产品</h3>
+                        <div className="supplier-edit-product-checkbox-list">
+                            {allProducts.map(product => (
+                                <label key={product.id} className="supplier-checkbox-label">
+                                <input 
+                                    type="checkbox"
+                                    checked={selectedProductIds.includes(product.id)}
+                                    onChange={() => handleProductCheckboxChange(product.id)}
+                                />
+                                <span>
+                                    {product.product_name}
+                                    <br />
+                                    <span className="subtext">{product.product_description}</span>
+                                </span>
+                                </label>
+                            ))}
+                        </div>
+                        <div className="supplier-edit-product-edit-actions">
+                            <button className="standard-button" onClick={handleSaveProducts}>保存</button>
+                            <button className="standard-button" onClick={handleCancelEdit}>取消</button>
+                        </div>
+                    </div>
+                </div>
+            )}
             <div className="supplier-list-search-bar-wrapper">
                 <FontAwesomeIcon icon={faSearch} className="supplier-list-search-icon" />
                 <input
@@ -149,7 +176,9 @@ const SupplierList = () => {
                                     {supplier.products.length > 0 ? (
                                         <ul className="supplier-products-list">
                                             {supplier.products.map(product => (
-                                                <li key={product.id}>{product.product_name}</li>
+                                                <li key={product.id}>
+                                                    {product.product_name}
+                                                </li>
                                             ))}
                                         </ul>
                                     ) : (
@@ -177,29 +206,7 @@ const SupplierList = () => {
                 </tbody>
             </table>
 
-            {selectedSupplier && (
-                <div className="edit-products-modal">
-                    <div className="edit-products-content">
-                        <h3>编辑 {selectedSupplier.supplier_name} 的产品</h3>
-                        <div className="checkbox-list">
-                            {allProducts.map(product => (
-                                <label key={product.id}>
-                                    <input
-                                        type="checkbox"
-                                        checked={selectedProductIds.includes(product.id)}
-                                        onChange={() => handleProductCheckboxChange(product.id)}
-                                    />
-                                    {product.product_name}
-                                </label>
-                            ))}
-                        </div>
-                        <div className="edit-actions">
-                            <button onClick={handleSaveProducts}>保存</button>
-                            <button onClick={handleCancelEdit}>取消</button>
-                        </div>
-                    </div>
-                </div>
-            )}
+            
         </div>
     );
 };
