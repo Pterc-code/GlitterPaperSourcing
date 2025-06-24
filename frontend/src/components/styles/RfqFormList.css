@@ -3,8 +3,5 @@
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    padding-right: 1vw;
-    padding-left: 0.2vw;
-    margin-top: 1vw;
     margin-bottom: 2vw;
 }

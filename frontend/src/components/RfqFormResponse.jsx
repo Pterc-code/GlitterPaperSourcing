@@ -5,6 +5,21 @@ import './styles/UniversalStyles.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
+/**
+ * RfqFormResponse component.
+ *
+ * Displays a summary table of supplier responses (quotes) for a specific RFQ form.
+ * - Fetches and displays form details and all supplier responses for the given formId.
+ * - Shows product and company information, closing date, and a dynamic table with fixed and custom columns.
+ * - Columns include supplier info, form headers, and (if allowed) the quote price.
+ * - Uses sticky columns for better horizontal scrolling and readability.
+ * - Only shows the quote column if the sourcing is closed or the user is an admin.
+ *
+ * Props:
+ * - formId: The ID of the RFQ form to display responses for.
+ * - onBack: Function to handle returning to the previous view.
+ */
+
 const RfqFormResponse = ({ formId, onBack }) => {
     const [form, setForm] = useState(null);
     const [responses, setResponses] = useState([]);

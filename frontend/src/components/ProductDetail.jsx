@@ -17,7 +17,7 @@ const ProductDetail = ({ product, onBack, onSettings  }) => {
         <div className="product-detail-view">
             {/* View mode List */}
             {viewMode === 'list' && (
-                <>
+                <div className='product-detail-wrapper'>
                     <ProductDetailHeaderButton
                         product={product}
                         onBack={onBack}
@@ -26,7 +26,7 @@ const ProductDetail = ({ product, onBack, onSettings  }) => {
                     />
                     <div className="create-rfq-form-button-wrapper">
                         <button className="create-rfq-form-button" onClick={() => setViewMode('create')}>
-                            <FontAwesomeIcon icon={Icons.faPlus} /> 创建采购单
+                            <FontAwesomeIcon icon={Icons.faPlus} /> 创建新采购单
                         </button>
                     </div>
 
@@ -41,7 +41,7 @@ const ProductDetail = ({ product, onBack, onSettings  }) => {
                             setViewMode('formResponse');
                         }}
                     />
-                </>
+                </div>
             )}
 
             {/* Viewmode Create */}

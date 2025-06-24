@@ -1,22 +1,13 @@
-:root {
-    --color-muted: #A0A5AC;
-    --color-muted-hover: #ffffff;
-    --color-border: var(--color-muted);
-    --color-text: var(--color-muted);
-    --color-icon: var(--color-muted);
-}
-
-/* Search bar and button CSS */
+/* Search bar styles */
 .rfq-search-bar {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-bottom: 1.1vw;
     border-bottom: 0.1vw solid var(--color-border);
 }
 
 .rfq-search-bar.admin {
-    width: 46vw;
+    width: 49.1vw;
 }
 
 .rfq-search-bar.user {
@@ -39,42 +30,39 @@
     opacity: 1;
 }
 
-.rfq-search-bar svg {
-    color: var(--color-icon);
-    font-size: 1vw;
-}
-
+.rfq-search-bar svg,
 .rfq-search-icon {
-    font-size: 1vw;
-    color: var(--color-icon);
+    color: var(--color-muted);
+    font-size: 1.1vw;
 }
 
-.rfq-status-buttons {
+/* Status/action buttons container */
+.rfq-controls-wrapper {
     width: 100%;
     margin-bottom: 2vh;
     display: flex;
-    flex-wrap: wrap;
-    gap: 1vw;
     justify-content: space-between;
-    align-items: center;
+    align-items: bottom;
 }
 
-.rfq-status-buttons button {
+/* Action buttons */
+.rfq-controls-wrapper button {
     padding: 1vh 2vw;
-    background-color: #FFFFFF;
-    color: var(--color-border);
+    background-color: #fff;
+    color: var(--color-muted);
     cursor: pointer;
     font-size: 1vw;
     border: 0.1vw solid var(--color-muted);
     white-space: nowrap;
     flex-shrink: 0;
+    transition: background 0.2s, color 0.2s;
 }
 
-.rfq-status-buttons button > * {
+.rfq-controls-wrapper button > * {
     margin-right: 0.5vw;
 }
 
-.rfq-status-buttons button:hover {
-    background-color: var(--color-muted); ;  
+.rfq-controls-wrapper button:hover {
+    background-color: var(--color-muted);
     color: #fff;
 }

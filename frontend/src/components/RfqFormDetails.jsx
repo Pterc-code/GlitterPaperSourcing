@@ -5,6 +5,22 @@ import './styles/UniversalStyles.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
+/**
+ * RfqFormDetails component.
+ *
+ * Displays detailed information for a specific RFQ form, including:
+ * - Product and company information
+ * - Additional remarks and reference PDF file
+ * - A dynamic table with form headers and row templates
+ * - Input fields for suppliers to submit quotes and remarks
+ *
+ * Handles data fetching, user input, and submission of supplier responses and remarks.
+ *
+ * Props:
+ * - formId: The ID of the RFQ form to display.
+ * - onBack: Function to handle returning to the previous view.
+ */
+
 const RfqFormDetails = ({ formId, onBack }) => {
     const [form, setForm] = useState(null);
     const [loading, setLoading] = useState(true);

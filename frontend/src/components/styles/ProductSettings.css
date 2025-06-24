@@ -6,7 +6,6 @@
 .product-settings-back-delete {
     display: flex;
     justify-content: space-between;
-    margin-top: 1vw;
 }
 
 .product-settings-inputs {
@@ -26,7 +25,6 @@
     border: 0.1vw solid #ccc;
     color: #777;
     cursor: pointer;
-    margin-right: 1vw;
     height: 3vw;
 }
 

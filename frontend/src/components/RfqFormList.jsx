@@ -4,7 +4,23 @@ import RfqActionBar from './RfqActionBar';
 import RfqTable from './RfqTable';
 import './styles/RfqFormList.css';
 
-const RfqFormList = ({ productId, onFormDetailClick, onFormResponseClick}) => {
+/**
+ * ProcurementTable component.
+ *
+ * Displays and manages the procurement workflow, including:
+ * - Listing all RFQ forms
+ * - Viewing details for a selected RFQ form
+ * - Viewing responses to a selected RFQ form
+ *
+ * Navigation between views is handled using viewMode and selectedFormId state.
+ * Renders child components conditionally based on user actions.
+ */
+
+const RfqFormList = ({ 
+    productId, 
+    onFormDetailClick, 
+    onFormResponseClick
+}) => {
     const [forms, setForms] = useState([]);
     const [filteredForms, setFilteredForms] = useState([]);
     const [selectedForms, setSelectedForms] = useState([]);
@@ -20,7 +36,6 @@ const RfqFormList = ({ productId, onFormDetailClick, onFormResponseClick}) => {
         );
     };
 
-    // Search result update on search bar change
     const handleSearchChange = (e) => {
         const value = e.target.value.trim();
         setSearchText(value);
@@ -34,7 +49,6 @@ const RfqFormList = ({ productId, onFormDetailClick, onFormResponseClick}) => {
         );
     };
 
-    // Loads forms when called
     const loadForms = useCallback(async () => {
         try {
             const response = await axios.get('/api/forms/form/');
@@ -49,7 +63,6 @@ const RfqFormList = ({ productId, onFormDetailClick, onFormResponseClick}) => {
         }
     }, [productId]);
 
-    // Change form status based on which forms are checked
     const updateStatus = async (status) => {
         try {
             await Promise.all(
@@ -65,7 +78,6 @@ const RfqFormList = ({ productId, onFormDetailClick, onFormResponseClick}) => {
         }
     };
 
-    // Delete form based on which forms are checked
     const deleteForms = async () => {
         try {
             await Promise.all(
@@ -81,7 +93,6 @@ const RfqFormList = ({ productId, onFormDetailClick, onFormResponseClick}) => {
         }
     };
 
-    // Load forms on render
     useEffect(() => {
         loadForms();
     }, [loadForms]);

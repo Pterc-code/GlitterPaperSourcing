@@ -1,6 +1,22 @@
 import { useEffect, useState } from 'react';
 import './styles/RfqTable.css';
 
+/**
+ * RfqTable component.
+ *
+ * Renders a table of RFQ forms with columns for order number, product, dates, and status.
+ * - Staff/admin users see checkboxes for selection and an 操作 (actions) column.
+ * - Suppliers only see forms for products they are allowed to view (filtered by allowedProducts).
+ * - Handles detail and response actions via onFormDetailClick and onFormResponseClick props.
+ *
+ * Props:
+ * - forms: Array of RFQ form objects to display.
+ * - selectedForms: Array of selected RFQ numbers (for bulk actions).
+ * - handleCheckboxChange: Function to handle checkbox selection.
+ * - onFormDetailClick: Function to handle clicking an RFQ number for details.
+ * - onFormResponseClick: Function to handle clicking the response button.
+ */
+
 const RfqTable = ({
     forms,
     selectedForms,

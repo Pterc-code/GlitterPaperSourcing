@@ -1,7 +1,16 @@
-.tabs {
+.dashboard-nav-wrapper {
+    margin-top: 2.67vw;
     display: flex;
-    border-bottom: 1px solid #dcdcdc;
+    flex-direction: column;
+    width: 100%;
+}
+
+.dashboard-tabs {
+    display: flex;
+    border-bottom: 0.1vw solid #dcdcdc;
+    width: 83vw;
     background-color: #f2f4f8;
+    margin-bottom: 1vw;
 }
 
 .tab-button {
@@ -33,17 +42,7 @@
     background-color: #1a3d8f;
 }
 
-.dashboard-nav {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-}
 
-
-
-@media (max-width: 768px) {
-  .tab-button {
-    font-size: 2.5vw;
-    padding: 2vw 3vw;
-  }
+.dashboard-content {
+    padding-right: 0.9vw;
 }

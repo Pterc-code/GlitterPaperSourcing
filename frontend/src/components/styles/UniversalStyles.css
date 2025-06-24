@@ -1,17 +1,35 @@
-.standard-button {
-    display: flex;
-    align-items: center;
-    gap: 0.4vw;
-    font-size: 0.9vw;
-    padding: 0.4vw 1vw;
-    margin-right: 1vw;
-    border: 0.1vw solid #ccc;
-    background-color: white;
-    color: #777;
-    cursor: pointer;
+:root {
+    --color-primary: #2563EB;
+    --color-primary-hover: #1d4ed8;
+    --color-muted: #A0A5AC;
+    --color-muted-hover: #ffffff;
+    --color-border: #C1C7CD;
+    --color-text: #213C45;
+    --color-danger: #F87171;
+    --color-success: #4ADE80;
 }
 
-.standard-button:hover {
-    background-color: #777;  
+.standard-button,
+.rfq-action-button,
+.rfq-view-button,
+.create-rfq-form-button,
+.create-product-form-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4vw;
+    font-size: 0.9vw;
+    background-color: white;
+    border: 0.1vw solid var(--color-muted);
+    color: var(--color-muted);
+    cursor: pointer;
+    padding: 0.4vw 1vw;
+    transition: background 0.2s, color 0.2s;
+}
+
+.standard-button:hover,
+.create-rfq-form-button:hover,
+.create-product-form-button:hover {
+    background-color: var(--color-muted);
     color: #fff;
 }

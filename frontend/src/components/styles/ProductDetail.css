@@ -2,7 +2,6 @@
     display: flex;
     flex-direction: column;
     width: 83vw;
-    margin-top: 1vw;
 }
 
 .product-detail-title {
@@ -18,8 +17,9 @@
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    padding-right: 1vw;
+
     margin-top: 1vw;
+    margin-bottom: 1vw;
 }
 
 .create-rfq-form-button {
@@ -29,8 +29,8 @@
     gap: 0.4vw;
     font-size: 0.9vw;
     background-color: white;
-    border: 0.1vw solid #ccc;
-    color: #777;
+    border: 0.1vw solid var(--color-muted);;
+    color: var(--color-muted);
     cursor: pointer;
     height: 3vw;
 }

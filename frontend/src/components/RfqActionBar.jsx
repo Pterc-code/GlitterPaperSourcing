@@ -3,6 +3,22 @@ import './styles/RfqActionBar.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faCheck, faXmark, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 
+/**
+ * RfqActionBar component.
+ *
+ * Renders the search bar and action buttons for the RFQ table.
+ * - The search bar is always visible.
+ * - Action buttons (set ongoing, set closed, delete) are only visible to staff/admin users.
+ * - User role is determined from the JWT token in localStorage.
+ *
+ * Props:
+ * - searchText: Current value of the search input.
+ * - handleSearchChange: Function to handle changes in the search input.
+ * - updateStatus: Function to update the status of selected forms.
+ * - deleteForms: Function to delete selected forms.
+ * - selectedCount: Number of currently selected forms.
+ */
+
 const RfqActionBar = ({ 
     searchText, 
     handleSearchChange, 
@@ -26,7 +42,7 @@ const RfqActionBar = ({
     }, []);
 
     return (
-        <div className="rfq-status-buttons">
+        <div className="rfq-controls-wrapper">
             <div className={`rfq-search-bar ${userRole === 'admin' ? 'admin' : 'user'}`}>
                 <FontAwesomeIcon icon={faSearch} className="rfq-search-icon" />
                 <input
@@ -59,7 +75,6 @@ const RfqActionBar = ({
                     </button>
                 </>
             )}
-            {/* No buttons for suppliers */}
         </div>
     );
 };

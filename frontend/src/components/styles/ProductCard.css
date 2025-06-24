@@ -6,10 +6,19 @@
     align-items: center;
     justify-content: center;
     background-color: white;
-    margin: 1vw;
-    border: 0.1vw solid black;
+    border: 0.1vw solid #213C45;
     padding: 0;
     color: #213C45;
+    transition: background, color 150ms;
+}
+
+.product-card:hover {
+    background: #213C45;
+    color: #fff;
+}
+
+.product-card:hover > p {
+    color: #fff;
 }
 
 .product-card > h3,
