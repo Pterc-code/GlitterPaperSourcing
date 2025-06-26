@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 const axiosInstance = axios.create({
-	baseURL: 'http://localhost:8000', // set this to your Django backend API
+	baseURL: process.env.REACT_APP_API_BASE_URL, // set this to your Django backend API
 	timeout: 5000,
 });
 
