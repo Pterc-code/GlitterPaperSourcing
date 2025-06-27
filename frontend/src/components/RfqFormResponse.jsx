@@ -4,21 +4,8 @@ import './styles/RfqFormResponse.css';
 import './styles/UniversalStyles.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
-
-/**
- * RfqFormResponse component.
- *
- * Displays a summary table of supplier responses (quotes) for a specific RFQ form.
- * - Fetches and displays form details and all supplier responses for the given formId.
- * - Shows product and company information, closing date, and a dynamic table with fixed and custom columns.
- * - Columns include supplier info, form headers, and (if allowed) the quote price.
- * - Uses sticky columns for better horizontal scrolling and readability.
- * - Only shows the quote column if the sourcing is closed or the user is an admin.
- *
- * Props:
- * - formId: The ID of the RFQ form to display responses for.
- * - onBack: Function to handle returning to the previous view.
- */
+import * as XLSX from 'xlsx';
+import { saveAs } from 'file-saver';
 
 const RfqFormResponse = ({ formId, onBack }) => {
     const [form, setForm] = useState(null);
@@ -61,17 +48,57 @@ const RfqFormResponse = ({ formId, onBack }) => {
         fetchData();
     }, [formId]);
 
+    const showQuotes = !form?.sourcing_status || userRole === 'admin';
+
+    const handleExportToExcel = () => {
+        if (!form || responses.length === 0) return;
+
+        const tableData = responses.map((res) => {
+            const row = form.row_templates.find(r => r.id === res.row_template);
+            const dataRow = {
+                供应商: res.supplier_name || '无数据',
+                联系人: res.supplier_representative || '无数据',
+                电话号码: res.phone_number || '无数据',
+                备注: res.remark || '无数据',
+            };
+
+            form.headers.forEach(header => {
+                dataRow[header.name] = row?.data?.[header.name] || '';
+            });
+
+            if (showQuotes) {
+                dataRow['报价'] = res.data?.报价 || '—';
+            }
+
+            return dataRow;
+        });
+
+        const worksheet = XLSX.utils.json_to_sheet(tableData);
+        const workbook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(workbook, worksheet, '报价汇总');
+
+        const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+        const blob = new Blob([excelBuffer], { type: 'application/octet-stream' });
+        saveAs(
+            blob,
+            `${form.product_name}_${form.product_description}_${form.creation_date.replaceAll(/[: ]/g, '-').slice(0, 10)}_${form.closing_date.replaceAll(/[: ]/g, '-').slice(0, 10)}_报价汇总.xlsx`
+        );
+    };
+
     if (loading) return <div className="form-details-loading">加载中...</div>;
     if (error) return <div className="form-details-error">{error}</div>;
     if (!form || responses.length === 0) return <div>暂无供应商报价</div>;
 
-    const showQuotes = !form.sourcing_status || userRole === 'admin';
-
     return (
         <div className="form-response-view">
-            <button className="standard-button" onClick={onBack}>
-                <FontAwesomeIcon icon={faArrowLeft} /> 返回
-            </button>
+            <div className="form-response-buttons">
+                <button className="standard-button" onClick={onBack}>
+                    <FontAwesomeIcon icon={faArrowLeft} /> 返回
+                </button>
+                <button className="standard-button" onClick={handleExportToExcel}>
+                    导出 Excel
+                </button>
+            </div>
 
             <div className="form-response-view-information">
                 <div className="form-response-header-wrapper">
