@@ -32,14 +32,18 @@
 }
 
 .login-register-link {
-    display: block;
-    text-align: center;
-    font-size: 1rem;
-    text-decoration: none;
-    color: #001D6C;
+    
 }
 
 .login-error {
     color: red;
     font-size: small;
+}
+
+.function-buttons {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1rem;
+    text-decoration: none;
+    color: #001D6C;
 }

@@ -17,7 +17,6 @@ Including another URLconf
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.urls import path, include
-from .forms import EmailBasedPasswordResetForm
 
 
 urlpatterns = [
@@ -25,12 +24,8 @@ urlpatterns = [
     path('api/accounts/', include('accounts.urls')),
     path('api/products/', include('products.urls')),
     path('api/forms/', include('forms.urls')),
+]
 
-
-    path('password_reset/', auth_views.PasswordResetView.as_view(
-        form_class=EmailBasedPasswordResetForm
-    ), name='password_reset'),
-    path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(), name='password_reset_done'),
-    path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
-    path('reset/done/', auth_views.PasswordResetCompleteView.as_view(), name='password_reset_complete'),
+urlpatterns += [
+    path('api/password_reset/', include('django_rest_passwordreset.urls', namespace='password_reset')),
 ]

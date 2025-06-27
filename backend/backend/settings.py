@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'accounts',
     'products',
     'forms',
+    'django_rest_passwordreset',
 ]
 
 MIDDLEWARE = [
@@ -143,5 +144,4 @@ EMAIL_HOST_USER = 'fzglitterpaper@gmail.com'
 EMAIL_HOST_PASSWORD = 'rlur fddl mpzw sflb'
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'Glitter Paper <fzglitterpaper@gmail.com>'
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

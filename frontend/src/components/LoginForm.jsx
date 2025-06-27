@@ -31,7 +31,7 @@ const LoginForm = () => {
     });
         localStorage.setItem('access_token', response.data.access);
         localStorage.setItem('refresh_token', response.data.refresh);
-        navigate('/dashboard');; 
+        navigate('/dashboard');
     } catch (err) {
       setError('登录失败，请检查邮箱和密码');
     }
@@ -65,12 +65,21 @@ const LoginForm = () => {
 
                 <div className="form-divider"></div>
 
-                <div>
+                <div className='function-buttons'>
                     <a href="/register" className="login-register-link">
                         注册账号
                     </a>
+
+
+                    <a href="/forgot-password" className="forgot-password-link">
+                        忘记密码？
+                    </a>
                 </div>
+
+                
             </form>
+
+            
         </div>
     );
 };

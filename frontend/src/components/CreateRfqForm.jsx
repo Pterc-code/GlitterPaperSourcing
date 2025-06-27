@@ -30,9 +30,9 @@ const CreateRfqForm = ({ product, onBack, onCreated }) => {
     const handleChange = (e) => {
         const { name, value, files } = e.target;
         if (name === 'pdf_file') {
-        setForm({ ...form, pdf_file: files[0] });
+            setForm({ ...form, pdf_file: files[0] });
         } else {
-        setForm({ ...form, [name]: value });
+            setForm({ ...form, [name]: value });
         }
     };
 
