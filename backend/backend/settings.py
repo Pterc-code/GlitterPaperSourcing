@@ -52,6 +52,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:3000",
     "http://124.71.15.137",
     "http://www.glitterpapersourcing.com",
+    "http://glitterpapersourcing.com"
 ]
 
 CORS_ALLOW_CREDENTIALS = True
