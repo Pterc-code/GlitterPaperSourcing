@@ -25,8 +25,11 @@ class RFQFormViewSet(viewsets.ModelViewSet):
 class FormRowResponseViewSet(viewsets.ModelViewSet):
     queryset = FormRowResponse.objects.all()
     serializer_class = FormRowResponseSerializer
-    permission_classes = [IsStaffOrAdminRole]
-    
+
+    def get_permissions(self):
+        if self.action == 'create':
+            return [IsAuthenticated()]
+        return [IsStaffOrAdminRole()]
 
     def get_queryset(self):
         form_param = self.request.query_params.get('form')
@@ -54,6 +57,7 @@ class FormRowResponseViewSet(viewsets.ModelViewSet):
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
         return Response(serializer.data, status=status.HTTP_200_OK if existing_response else status.HTTP_201_CREATED)
+
     
 class SupplierFormRemarkViewSet(viewsets.ModelViewSet):
     queryset = SupplierFormRemark.objects.all()
