@@ -139,10 +139,10 @@ X_FRAME_OPTIONS = 'DENY'
 
 # === Email ===
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST = 'smtp.qq.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'fzglitterpaper@gmail.com'
-EMAIL_HOST_PASSWORD = 'rlur fddl mpzw sflb'
+EMAIL_HOST_USER = '1620993903@qq.com'
+EMAIL_HOST_PASSWORD = 'fordlzdpdhyxcbhb'
 EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = 'Glitter Paper <fzglitterpaper@gmail.com>'
+DEFAULT_FROM_EMAIL = '福州科瑞特 <1620993903@qq.com>'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
