@@ -5,7 +5,7 @@ from django.core.mail import send_mail
 @receiver(reset_password_token_created)
 def password_reset_token_created(sender, instance, reset_password_token, *args, **kwargs):
     # 前端地址（本地开发或部署后请更改）
-    base_url = "http://localhost:3000"
+    base_url = "http://glitterpapersourcing.com"
 
     # 构造重置链接
     reset_url = f"{base_url}/reset-password-form/{reset_password_token.key}"
