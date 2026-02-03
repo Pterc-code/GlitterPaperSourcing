@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'products',
     'forms',
     'django_rest_passwordreset',
+    'rest_framework_simplejwt.token_blacklist',
 ]
 
 MIDDLEWARE = [

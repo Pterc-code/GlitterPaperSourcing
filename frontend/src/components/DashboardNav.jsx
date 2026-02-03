@@ -75,9 +75,7 @@ const DashboardNav = () => {
                 )}
             </div>
 
-            <div className="dashboard-content">
-                {renderContent()}
-            </div>
+            _
         </div>
     );
 };

@@ -4,6 +4,8 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from django.contrib.auth import authenticate
 from rest_framework.exceptions import AuthenticationFailed
 from products.models import Product
+from rest_framework import serializers
+from rest_framework_simplejwt.tokens import RefreshToken, TokenError
 
 class SupplierRegisterSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
@@ -88,44 +90,11 @@ class SupplierListSerializer(serializers.ModelSerializer):
             for product in obj.supplier_profile.products.all()
         ]
     
+class UserDetailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', 'email', 'username']    
     
-    
-class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
-    username_field = 'email'
-
-    def validate(self, attrs):
-        email = attrs.get('email')
-        password = attrs.get('password')
-
-        user = authenticate(
-            request=self.context.get('request'),
-            username=email,
-            password=password
-        )
-
-        if user is None:
-            raise AuthenticationFailed("Invalid email or password.")
-
-        refresh = self.get_token(user)
-
-        # Add custom claims to the access token
-        access = refresh.access_token
-        access['role'] = user.role  # ✅ Add role to token payload
-
-        if user.role == 'supplier':
-            supplier_profile = user.supplier_profile  # get SupplierProfile object
-            product_ids = list(supplier_profile.products.values_list('id', flat=True))
-            access['products'] = product_ids
-
-
-        data = {
-            'refresh': str(refresh),
-            'access': str(access),
-        }
-
-        return data
-    
-
 class SupplierUpdateSerializer(serializers.ModelSerializer):
     supplier_name = serializers.CharField(source='supplier_profile.supplier_name', required=False)
     supplier_representative = serializers.CharField(source='supplier_profile.supplier_representative', required=False)
@@ -163,3 +132,52 @@ class SupplierUpdateSerializer(serializers.ModelSerializer):
 
         profile.save()
         return instance
+
+class LogoutSerializer(serializers.Serializer):
+    refresh = serializers.CharField()
+
+    def validate(self, attrs):
+        self.token = attrs['refresh']
+        return attrs
+
+    def save(self, **kwargs):
+        try:
+            token = RefreshToken(self.token)
+            token.blacklist()
+        except TokenError:
+            raise serializers.ValidationError("Invalid or expired token.")
+        
+class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
+    username_field = 'email'
+
+    def validate(self, attrs):
+        email = attrs.get('email')
+        password = attrs.get('password')
+
+        user = authenticate(
+            request=self.context.get('request'),
+            username=email,
+            password=password
+        )
+
+        if user is None:
+            raise AuthenticationFailed("Invalid email or password.")
+
+        refresh = self.get_token(user)
+
+        # Add custom claims to the access token
+        access = refresh.access_token
+        access['role'] = user.role  # ✅ Add role to token payload
+
+        if user.role == 'supplier':
+            supplier_profile = user.supplier_profile  # get SupplierProfile object
+            product_ids = list(supplier_profile.products.values_list('id', flat=True))
+            access['products'] = product_ids
+
+
+        data = {
+            'refresh': str(refresh),
+            'access': str(access),
+        }
+
+        return data
